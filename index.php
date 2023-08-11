@@ -1,6 +1,15 @@
 <?php
-$con = new mysqli("localhost", "mphil", "", "mvctut");
+try {
+$con = new mysqli("localhost", "mphil", "asdf", "mvctut");
 
+if ($con->connect_error) {
+    throw new Exception("Error" . $con->connect_error);
+}
+}
+catch (Exception $ex) {
+    error_log($ex->getMessage());
+    echo "Cannot connect at this time!";
+}
 if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
