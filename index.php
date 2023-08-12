@@ -1,6 +1,6 @@
 <?php
 try {
-$con = new mysqli("localhost", "mphil", "asdf", "mvctut");
+$con = new mysqli("localhost", "mphil", "", "mvctut");
 
 if ($con->connect_error) {
     throw new Exception("Error" . $con->connect_error);
