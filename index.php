@@ -1,12 +1,11 @@
 <?php
 try {
-$con = new mysqli("localhost", "mphil", "", "mvctut");
+    $con = new mysqli("localhost", "mphil", "", "mvctut");
 
-if ($con->connect_error) {
-    throw new Exception("Error" . $con->connect_error);
-}
-}
-catch (Exception $ex) {
+    if ($con->connect_error) {
+        throw new Exception("Error" . $con->connect_error);
+    }
+} catch (Exception $ex) {
     error_log($ex->getMessage());
     echo "Cannot connect at this time!";
 }
@@ -15,9 +14,18 @@ if (isset($_POST['submit'])) {
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
 
-    $query = "INSERT INTO users (first_name, last_name, email) VALUES ('$first_name', '$last_name', '$email')";
+    $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
 
-    $con->query($query);
+    $statement = $con->prepare($query);
+
+    $statement->bind_param(
+        "sss",
+        $first_name,
+        $last_name,
+        $email
+    );
+
+    $statement->execute();
 }
 
 // echo '<pre>';
