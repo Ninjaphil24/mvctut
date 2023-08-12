@@ -9,6 +9,10 @@ try {
     error_log($ex->getMessage());
     echo "Cannot connect at this time!";
 }
+
+$errorbool1 = false;
+$errorbool2 = false;
+
 if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -25,7 +29,11 @@ if (isset($_POST['submit'])) {
         $email
     );
 
-    $statement->execute();
+    if ($statement->execute()) {
+        header("Location: success.php");
+        exit;
+    } else if ($con->errno===1062) $errorbool1 = true;
+    else if ($con->errno===3819) $errorbool2 = true;
 }
 
 // echo '<pre>';
@@ -58,8 +66,11 @@ if (isset($_POST['submit'])) {
                 <label for="last_name">Last Name</label>
             </div>
             <div class="inputBox">
-                <input type="text" id="email" name="email" required>
+                <input type="email" id="email" name="email" required>
                 <label for="email">Email</label>
+                <?php if ($errorbool1) echo '<div style="color: red;">Your email is already being used!</div> <br> <br>';
+                else if ($errorbool2) echo '<div style="color: red;">This field cannot be empty!</div> <br> <br>';
+                ?>
             </div>
             <div class="inputBox">
                 <input type="submit" name="submit" value="Submit">
