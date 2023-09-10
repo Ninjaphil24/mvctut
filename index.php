@@ -1,6 +1,7 @@
 <?php
 require_once('env.php');
 require_once('mysqlconnect.php');
+require_once('models/UserModel.php');
 
 $errorbool1 = false;
 $errorbool2 = false;
@@ -9,23 +10,7 @@ if (isset($_POST['submit'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
-
-    $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
-
-    $statement = $con->prepare($query);
-
-    $statement->bind_param(
-        "sss",
-        $first_name,
-        $last_name,
-        $email
-    );
-
-    if ($statement->execute()) {
-        header("Location: success.php");
-        exit;
-    } else if ($con->errno===1062) $errorbool1 = true;
-    else if ($con->errno===3819) $errorbool2 = true;
+    createUser($con, $first_name, $last_name, $email);    
 }
 
 // echo '<pre>';
