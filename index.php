@@ -1,14 +1,6 @@
 <?php
-try {
-    $con = new mysqli("localhost", "mphil", "", "mvctut");
-
-    if ($con->connect_error) {
-        throw new Exception("Error" . $con->connect_error);
-    }
-} catch (Exception $ex) {
-    error_log($ex->getMessage());
-    echo "Cannot connect at this time!";
-}
+require_once('env.php');
+require_once('mysqlconnect.php');
 
 $errorbool1 = false;
 $errorbool2 = false;
