@@ -25,7 +25,7 @@ require_once('controllers/UserController.php');
 
 <body>
     <?php 
-        require_once('views/home.php')
+        require_once('views/home.php');
     ?>
 </body>
 
