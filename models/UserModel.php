@@ -15,7 +15,7 @@ function createUser($con, $first_name, $last_name, $email)
     );
 
     if ($statement->execute()) {
-        header("Location: views/success.php");
+        header("Location: ./index.php");
         exit;
     } else if ($con->errno === 1062) $errorbool1 = true;
     else if ($con->errno === 3819) $errorbool2 = true;
