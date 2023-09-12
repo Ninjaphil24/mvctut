@@ -28,13 +28,13 @@ $creator->create($con);
     <?php
     if ($_SERVER['REQUEST_URI'] == "/index.php") $creator->success();
     else require_once('app/views/home.php');
-
-
-
-    echo '<pre style="position: absolute; bottom: 0; left: 5px;">';
-    echo 'Method: ' . $_SERVER['REQUEST_METHOD'];
-    echo '<br><br> URI: ' . $_SERVER['REQUEST_URI'] . '</pre>';
     ?>
+
+    <pre style="position: absolute; bottom: 0; left: 5px;">
+    Method: <?php echo $_SERVER['REQUEST_METHOD']; ?>
+    <br><br> 
+    URI: <?php echo $_SERVER['REQUEST_URI']; ?></pre>
+    
 </body>
 
 </html>
