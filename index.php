@@ -3,7 +3,7 @@ require_once('env.php');
 require_once('mysqlconnect.php');
 require_once('models/UserModel.php');
 require_once('controllers/UserController.php');
-
+create($con);
 
 // echo '<pre>';
 // var_dump($_POST['first_name']);
@@ -25,7 +25,7 @@ require_once('controllers/UserController.php');
 
 <body>
     <?php
-    if ($_SERVER['REQUEST_URI'] == "/index.php") require_once('views/success.php');
+    if ($_SERVER['REQUEST_URI'] == "/index.php") success();
     else require_once('views/home.php');
 
 
