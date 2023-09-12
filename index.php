@@ -3,15 +3,6 @@ require_once('env.php');
 require_once('mysqlconnect.php');
 require_once('app/models/UserModel.php');
 require_once('app/controllers/UserController.php');
-$creator = new UserController;
-$creator->create($con);
-
-// echo '<pre>';
-// var_dump($_POST['first_name']);
-// var_dump($last_name);
-// var_dump($email);
-// echo '</pre>';
-
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +17,18 @@ $creator->create($con);
 
 <body>
     <?php
-    if ($_SERVER['REQUEST_URI'] == "/index.php") $creator->success();
-    else require_once('app/views/home.php');
+    if ($_SERVER['REQUEST_URI'] == "/") {
+        $home = new UserController;
+        $home->home();
+    }
+    else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='POST'){
+        $creator = new UserController;
+        $creator->create($con);
+    }        
+    else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='GET'){
+        $success = new RegisterSuccess;
+        $success->success();
+    }
     ?>
 
     <pre style="position: absolute; bottom: 0; left: 5px;">

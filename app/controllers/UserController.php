@@ -3,6 +3,10 @@ $errorbool1 = false;
 $errorbool2 = false;
 class UserController
 {
+    function home()
+    {
+        require_once('app/views/home.php');
+    }
     function create($con)
     {
         if (isset($_POST['submit'])) {
@@ -13,7 +17,10 @@ class UserController
             $store->createUser($con, $first_name, $last_name, $email);
         }
     }
+}
 
+class RegisterSuccess
+{
     function success()
     {
         require_once('app/views/success.php');
