@@ -5,6 +5,8 @@ class UserController
 {
     function home()
     {
+        global $errorbool1;
+        global $errorbool2;
         require_once('app/views/home.php');
     }
     function create($con)
