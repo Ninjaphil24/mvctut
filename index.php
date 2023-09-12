@@ -1,9 +1,10 @@
 <?php
 require_once('env.php');
 require_once('mysqlconnect.php');
-require_once('models/UserModel.php');
-require_once('controllers/UserController.php');
-create($con);
+require_once('app/models/UserModel.php');
+require_once('app/controllers/UserController.php');
+$creator = new UserController;
+$creator->create($con);
 
 // echo '<pre>';
 // var_dump($_POST['first_name']);
@@ -25,8 +26,8 @@ create($con);
 
 <body>
     <?php
-    if ($_SERVER['REQUEST_URI'] == "/index.php") success();
-    else require_once('views/home.php');
+    if ($_SERVER['REQUEST_URI'] == "/index.php") $creator->success();
+    else require_once('app/views/home.php');
 
 
 
