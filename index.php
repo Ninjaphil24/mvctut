@@ -2,8 +2,6 @@
 
 require "vendor/autoload.php";
 use UserControllerSpace\UserController;
-use UserModelNamespace\UserModel;
-
 require_once('env.php');
 require_once('mysqlconnect.php');
 // require_once('app/models/UserModel.php');
@@ -23,20 +21,19 @@ require_once('mysqlconnect.php');
 <body>
     <?php
     if ($_SERVER['REQUEST_URI'] == "/") {
-        $home = new UserController($errorbool1,$errorbool2);
+        $home = new UserController;
         $home->home();
     }
     else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='POST'){
-        $creator = new UserController($errorbool1,$errorbool2);
-        $creator->create($con,$errorbool1,$errorbool2);
+        $creator = new UserController;
+        $creator->create($con);
     }        
     else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='GET'){
-        $success = new UserController($errorbool1,$errorbool2);
+        $success = new UserController;
         $success->success();
     }
-    $errors = new UserModel;
     if ($errorbool1) {
-        $home = new UserController($errorbool1,$errorbool2);
+        $home = new UserController;
         $home->home();
     }
     ?>
