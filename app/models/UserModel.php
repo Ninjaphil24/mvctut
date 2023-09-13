@@ -1,6 +1,8 @@
 <?php
+namespace UserModelNamespace;
 class UserModel
 {
+    
     function createUser($con, $first_name, $last_name, $email)
     {
 

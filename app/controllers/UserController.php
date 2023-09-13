@@ -1,4 +1,7 @@
 <?php
+namespace UserControllerSpace;
+
+use UserModelNamespace\UserModel;
 $errorbool1 = false;
 $errorbool2 = false;
 class UserController
@@ -19,10 +22,6 @@ class UserController
             $store->createUser($con, $first_name, $last_name, $email);
         }
     }
-}
-
-class RegisterSuccess
-{
     function success()
     {
         require_once('app/views/success.php');

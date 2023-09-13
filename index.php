@@ -1,8 +1,13 @@
 <?php
+
+require "vendor/autoload.php";
+use UserControllerSpace\UserController;
+use UserModelNamespace\UserModel;
+
 require_once('env.php');
 require_once('mysqlconnect.php');
-require_once('app/models/UserModel.php');
-require_once('app/controllers/UserController.php');
+// require_once('app/models/UserModel.php');
+// require_once('app/controllers/UserController.php');
 ?>
 
 <!DOCTYPE html>
@@ -18,19 +23,20 @@ require_once('app/controllers/UserController.php');
 <body>
     <?php
     if ($_SERVER['REQUEST_URI'] == "/") {
-        $home = new UserController;
+        $home = new UserController($errorbool1,$errorbool2);
         $home->home();
     }
     else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='POST'){
-        $creator = new UserController;
-        $creator->create($con);
+        $creator = new UserController($errorbool1,$errorbool2);
+        $creator->create($con,$errorbool1,$errorbool2);
     }        
     else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='GET'){
-        $success = new RegisterSuccess;
+        $success = new UserController($errorbool1,$errorbool2);
         $success->success();
     }
+    $errors = new UserModel;
     if ($errorbool1) {
-        $home = new UserController;
+        $home = new UserController($errorbool1,$errorbool2);
         $home->home();
     }
     ?>
