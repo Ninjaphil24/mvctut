@@ -17,10 +17,6 @@ class UserModel
             $email
         );
 
-        if ($statement->execute()) {
-            header("Location: ../index.php");
-            exit;
-        } else if ($con->errno === 1062) $GLOBALS['errorbool1'] = true;
-        else if ($con->errno === 3819) $GLOBALS['errorbool2'] = true;
+        return $statement->execute() ? 0 : $con->errno;
     }
 }

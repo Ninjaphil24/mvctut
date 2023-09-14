@@ -1,11 +1,8 @@
 <?php
-
 require "vendor/autoload.php";
 use UserControllerSpace\UserController;
 require_once('env.php');
 require_once('mysqlconnect.php');
-// require_once('app/models/UserModel.php');
-// require_once('app/controllers/UserController.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,19 +24,10 @@ require_once('mysqlconnect.php');
     else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='POST'){
         $creator = new UserController;
         $creator->create($con);
-    }        
-    else if ($_SERVER['REQUEST_URI'] == "/index.php" && $_SERVER['REQUEST_METHOD']=='GET'){
-        $success = new UserController;
-        $success->success();
-    }
-    if ($errorbool1) {
-        $home = new UserController;
-        $home->home();
     }
     ?>
 
     <pre style="position: absolute; bottom: 0; left: 5px;">
-    <?php var_dump($errorbool1);?>
     
     Method: <?php echo $_SERVER['REQUEST_METHOD']; ?>
     <br><br> 
