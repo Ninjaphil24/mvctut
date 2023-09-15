@@ -11,8 +11,8 @@
         <div class="inputBox">
             <input type="email" id="email" name="email" required>
             <label for="email">Email</label>
-            <?php if ($errorbool1) echo '<div style="color: red;">Your email is already being used!</div> <br> <br>';
-            else if ($errorbool2) echo '<div style="color: red;">This field cannot be empty!</div> <br> <br>';
+            <?php if ($result==1062) echo '<div style="color: red;">Your email is already being used!</div> <br> <br>';
+            else if ($result==3819) echo '<div style="color: red;">This field cannot be empty!</div> <br> <br>';
             ?>
         </div>
         <div class="inputBox">
