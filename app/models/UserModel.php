@@ -1,8 +1,10 @@
 <?php
+
 namespace UserModelNamespace;
+
 class UserModel
 {
-    
+
     function createUser($con, $first_name, $last_name, $email)
     {
 
@@ -16,7 +18,7 @@ class UserModel
             $last_name,
             $email
         );
-
-        return $statement->execute() ? 0 : $con->errno;
+        $statement->execute();
+        return $con->errno;
     }
 }
