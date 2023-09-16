@@ -18,19 +18,19 @@ class UserController
             $email = $_POST['email'];
             $store = new UserModel;
             $result = $store->createUser($con, $first_name, $last_name, $email);
-
             switch ($result) {
                 case 0:
                     require_once('app/views/success.php');
                     break;
                 case 1062:
+                    $error = '<div style="color: red;">Your email is already being used!</div> <br> <br>';
                     require_once('app/views/home.php');
                     break;
                 case 3819:
+                    $error = '<div style="color: red;">This field cannot be empty!</div> <br> <br>';
                     require_once('app/views/home.php');
                     break;
             }
-            return $result;
         }
     }
 }
