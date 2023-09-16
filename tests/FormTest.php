@@ -1,6 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
+use UserModelNamespace\UserModel;
 
 class FormTest extends TestCase
 {
@@ -37,7 +38,7 @@ class FormTest extends TestCase
 
         $result = $statement->execute();
 
-        $this->assertTrue($result);
+        $this->assertTrue($result, "If this test has failed, delete entry in database!");
     }
 
     public function testForDuplicateEmail()
@@ -66,13 +67,33 @@ class FormTest extends TestCase
 
         $result = $statement->execute();
 
-        $this->assertFalse($result);
+        $this->assertFalse($result, "If this test has failed, delete entry in database!");
         $this->deleteRow();
     }
 
+    public function testFormSubmissionFunc()
+    {
+        $query = new UserModel;
+        $result = $query->createUser($this->con, 'John','Smith','john@smith.com');
+        $this->assertEquals(0, $result, "If this test has failed, delete entry in database!");
+    }
+
+    public function testForDuplicateEmailFunc()
+    {
+        $query = new UserModel;
+        $result = $query->createUser($this->con, 'John','Smith','john@smith.com');
+        $this->assertEquals(1062, $result, "If this test has failed, delete entry in database!");
+        $this->deleteRow();
+    }
     public function deleteRow()
     {
         $query = "DELETE FROM users WHERE email = 'john@smith.com'";
         $this->con->query($query);
-    }    
+    }  
+    public function testForEmptyEmailField()
+    {
+        $query = new UserModel;
+        $result = $query->createUser($this->con, 'John','Smith','');
+        $this->assertEquals(3819, $result);
+    }
 }
