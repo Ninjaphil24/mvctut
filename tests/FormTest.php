@@ -38,7 +38,7 @@ class FormTest extends TestCase
 
         $result = $statement->execute();
 
-        $this->assertTrue($result, "If this test has failed, delete entry in database!");
+        $this->assertTrue($result, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
 
     public function testForDuplicateEmail()
@@ -67,7 +67,7 @@ class FormTest extends TestCase
 
         $result = $statement->execute();
 
-        $this->assertFalse($result, "If this test has failed, delete entry in database!");
+        $this->assertFalse($result, "If this test has failed, check database for entry with email john@smith.com and delete!");
         $this->deleteRow();
     }
 
@@ -75,14 +75,14 @@ class FormTest extends TestCase
     {
         $query = new UserModel;
         $result = $query->createUser($this->con, 'John','Smith','john@smith.com');
-        $this->assertEquals(0, $result, "If this test has failed, delete entry in database!");
+        $this->assertEquals(0, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
 
     public function testForDuplicateEmailFunc()
     {
         $query = new UserModel;
         $result = $query->createUser($this->con, 'John','Smith','john@smith.com');
-        $this->assertEquals(1062, $result, "If this test has failed, delete entry in database!");
+        $this->assertEquals(1062, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
         $this->deleteRow();
     }
     public function deleteRow()
