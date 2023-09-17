@@ -71,17 +71,17 @@ class FormTest extends TestCase
         $this->deleteRow();
     }
 
-    public function testFormSubmissionFunc()
+    public function testFormSubmissionIntegration()
     {
         $query = new UserModel;
-        $result = $query->createUser($this->con, 'John','Smith','john@smith.com');
+        $result = $query->createUser($this->con, 'John', 'Smith', 'john@smith.com');
         $this->assertEquals(0, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
 
-    public function testForDuplicateEmailFunc()
+    public function testForDuplicateEmailIntegration()
     {
         $query = new UserModel;
-        $result = $query->createUser($this->con, 'John','Smith','john@smith.com');
+        $result = $query->createUser($this->con, 'John', 'Smith', 'john@smith.com');
         $this->assertEquals(1062, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
         $this->deleteRow();
     }
@@ -89,11 +89,11 @@ class FormTest extends TestCase
     {
         $query = "DELETE FROM users WHERE email = 'john@smith.com'";
         $this->con->query($query);
-    }  
+    }
     public function testForEmptyEmailField()
     {
         $query = new UserModel;
-        $result = $query->createUser($this->con, 'John','Smith','');
+        $result = $query->createUser($this->con, 'John', 'Smith', '');
         $this->assertEquals(3819, $result);
     }
 }
