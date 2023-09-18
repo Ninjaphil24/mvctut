@@ -71,6 +71,31 @@ class FormTest extends TestCase
         $this->deleteRow();
     }
 
+    public function testFormSubmissionMock()
+    {
+        $con = $this->createMock(mysqli::class);
+        $stmt = $this->createMock(mysqli_stmt::class);
+        $first_name = "John";
+        $last_name = "Smith";
+        $email = "john@smith.com";
+        $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
+        $con->expects($this->once())
+            ->method('prepare')
+            ->with($query)
+            ->willReturn($stmt);
+        $stmt->expects($this->once())
+            ->method('bind_param')
+            ->with("sss", $first_name, $last_name, $email)
+            ->willReturn(true);
+        $stmt->expects($this->once())
+            ->method('execute')
+            ->willReturn(true);
+
+        $query = new UserModel;
+        $result = $query->createUser($con, 'John', 'Smith', 'john@smith.com');
+        $this->assertTrue($result);
+    }
+
     public function testFormSubmissionIntegration()
     {
         $query = new UserModel;

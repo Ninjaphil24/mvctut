@@ -18,7 +18,7 @@ class UserModel
             $last_name,
             $email
         );
-        $statement->execute();
-        return $con->errno;
+        return $statement->execute();
+        // return $con->errno;
     }
 }
