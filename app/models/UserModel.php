@@ -2,6 +2,9 @@
 
 namespace UserModelNamespace;
 
+use UserModelNamespace\DuplicateEmail;
+use UserModelNamespace\EmptyEmailField;
+
 class UserModel
 {
 
@@ -18,8 +21,25 @@ class UserModel
             $last_name,
             $email
         );
-        if ($statement->execute()) return 0;
-        else if ($con->errno==1062) return 1062;
-        else if ($con->errno==3819) return 3819;
+
+        try {
+            if ($statement->execute()) return 0;
+            else
+                switch ($con->errno) {
+                    case 0:
+                        return 0;
+                        break;
+                    case 1062:
+                        throw new DuplicateEmail;
+                        break;
+                    case 3819:
+                        throw new EmptyEmailField;
+                        break;
+                }
+        } catch (DuplicateEmail $e) {
+            return 1062;
+        } catch (EmptyEmailField $e) {
+            return 3819;
+        }
     }
 }
