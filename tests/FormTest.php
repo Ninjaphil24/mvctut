@@ -93,7 +93,7 @@ class FormTest extends TestCase
 
         $query = new UserModel;
         $result = $query->createUser($con, 'John', 'Smith', 'john@smith.com');
-        $this->assertTrue($result);
+        $this->assertEquals(0, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
 
     public function testFormSubmissionIntegration()
