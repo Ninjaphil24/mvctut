@@ -11,7 +11,7 @@
         <div class="inputBox">
             <input type="email" id="email" name="email" required>
             <label for="email">Email</label>
-            <?php if (isset($error)) echo $error;?>
+            <?php if (isset($errorMsg)) echo '<div style="color: red;">'.$errorMsg.'</div> <br> <br>';?>
         </div>
         <div class="inputBox">
             <input type="submit" name="submit" value="Submit">

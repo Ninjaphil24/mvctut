@@ -8,7 +8,7 @@ use UserModelNamespace\EmptyEmailField;
 class UserModel
 {
 
-    function createUser($con, $first_name, $last_name, $email)
+    function createUser($con, $first_name, $last_name, $email, &$errorMsg)
     {
 
         $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
@@ -23,23 +23,22 @@ class UserModel
         );
 
         try {
-            if ($statement->execute()) return 0;
+            if ($statement->execute()) return true;
             else
                 switch ($con->errno) {
-                    case 0:
-                        return 0;
-                        break;
                     case 1062:
-                        throw new DuplicateEmail;
+                        throw new DuplicateEmail("Your email is already being used!");
                         break;
                     case 3819:
-                        throw new EmptyEmailField;
+                        throw new EmptyEmailField("This field cannot be empty!");
                         break;
                 }
         } catch (DuplicateEmail $e) {
-            return 1062;
+            $errorMsg = $e->getMessage();
+            return false;
         } catch (EmptyEmailField $e) {
-            return 3819;
+            $errorMsg = $e->getMessage();
+            return false;
         }
     }
 }
