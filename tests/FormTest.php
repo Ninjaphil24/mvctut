@@ -92,22 +92,22 @@ class FormTest extends TestCase
             ->willReturn(true);
 
         $query = new UserModel;
-        $result = $query->createUser($con, 'John', 'Smith', 'john@smith.com');
-        $this->assertEquals(0, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
+        $errorMsg = $query->createUser($con, 'John', 'Smith', 'john@smith.com');
+        $this->assertEquals('', $errorMsg, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
 
     public function testFormSubmissionIntegration()
     {
         $query = new UserModel;
-        $result = $query->createUser($this->con, 'John', 'Smith', 'john@smith.com');
-        $this->assertEquals(0, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
+        $errorMsg = $query->createUser($this->con, 'John', 'Smith', 'john@smith.com');
+        $this->assertEquals('', $errorMsg, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
 
     public function testForDuplicateEmailIntegration()
     {
         $query = new UserModel;
-        $result = $query->createUser($this->con, 'John', 'Smith', 'john@smith.com');
-        $this->assertEquals(1062, $result, "If this test has failed, check database for entry with email john@smith.com and delete!");
+        $errorMsg = $query->createUser($this->con, 'John', 'Smith', 'john@smith.com');
+        $this->assertEquals('Your email is already being used!', $errorMsg, "If this test has failed, check database for entry with email john@smith.com and delete!");
         $this->deleteRow();
     }
     public function deleteRow()
@@ -118,7 +118,7 @@ class FormTest extends TestCase
     public function testForEmptyEmailField()
     {
         $query = new UserModel;
-        $result = $query->createUser($this->con, 'John', 'Smith', '');
-        $this->assertEquals(3819, $result);
+        $errorMsg = $query->createUser($this->con, 'John', 'Smith', '');
+        $this->assertEquals('This field cannot be empty!', $errorMsg);
     }
 }

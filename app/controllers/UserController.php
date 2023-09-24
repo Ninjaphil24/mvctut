@@ -17,9 +17,8 @@ class UserController
             $last_name = $_POST['last_name'];
             $email = $_POST['email'];
             $store = new UserModel;
-            $errorMsg = "";
-            $result = $store->createUser($con, $first_name, $last_name, $email, $errorMsg);
-            if ($result) require_once('app/views/success.php');
+            $errorMsg = $store->createUser($con, $first_name, $last_name, $email);
+            if ($errorMsg==="") require_once('app/views/success.php');
             else require_once('app/views/home.php');
         }
     }
