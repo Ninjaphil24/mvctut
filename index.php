@@ -25,10 +25,12 @@ require_once('mysqlconnect.php');
 
     <pre style="position: absolute; bottom: 0; left: 5px;">
     
-    Method: <?php echo $_SERVER['REQUEST_METHOD']; ?>
+    URI: <?php
+    //  echo $_SERVER['REQUEST_METHOD']; ?>
     Method: <?php print_r($router); ?>
     <br><br> 
-    URI: <?php echo $_SERVER['REQUEST_URI']; ?></pre>
+    URI: <?php
+    //  echo $_SERVER['REQUEST_URI']; ?></pre>
     
 </body>
 

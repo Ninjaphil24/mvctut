@@ -18,15 +18,15 @@ class IndexTest extends TestCase
         $this->assertTrue($result);
     }
 
-    // public function testIndexOutput() 
-    // {
-    //     ob_start();
-    //     require("index.php");
-    //     $contents = ob_get_contents();
-    //     ob_end_clean();
+    public function testIndexOutput() 
+    {
+        ob_start();
+        require("index.php");
+        $contents = ob_get_contents();
+        ob_end_clean();
 
-    //     $this->assertStringContainsString('<div class="box">',$contents);
-    // }
+        $this->assertStringContainsString('<body>',$contents);
+    }
 
     protected function tearDown(): void
     {
