@@ -1,5 +1,4 @@
 <?php
-
 require "vendor/autoload.php";
 use RouterSpace\Routes;
 require_once('env.php');
