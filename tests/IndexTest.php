@@ -58,9 +58,7 @@ class IndexTest extends TestCase
         $routesMock = $this->createPartialMock(Routes::class, ['createRoutes']);
         $routesMock->expects($this->once())
             ->method('createRoutes')
-            ->willReturnCallback(function () use ($routesMock) {
-                $routesMock->routes = ['/' => ['controller' => 'Broken', 'method' => 'broken']];
-            });
+            ->willReturn($routesMock->routes = ['/' => ['controller' => 'Broken', 'method' => 'broken']]);
 
         ob_start();
         $routesMock->dispatch();
