@@ -81,8 +81,6 @@ class IndexTest extends TestCase
         ob_start();
         $routesMock->dispatch();
         $contents = ob_get_clean();
-        print_r($routesMock->routes);
-        var_dump($contents);
         $this->assertStringContainsString('Method does not exist!', $contents);
     }
 
