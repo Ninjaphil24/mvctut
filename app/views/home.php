@@ -17,4 +17,5 @@
             <input type="submit" name="submit" value="Submit">
         </div>
     </form>
+    <a href="list">Go to List</a>
 </div>

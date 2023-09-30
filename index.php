@@ -1,8 +1,6 @@
 <?php
 require "vendor/autoload.php";
 use RouterSpace\Routes;
-use UserControllerSpace\UserController;
-
 require_once('env.php');
 require_once('mysqlconnect.php');
 ?>
@@ -22,18 +20,6 @@ require_once('mysqlconnect.php');
     $router = new Routes;
     $router->dispatch();
     ?>
-
-    <pre style="position: absolute; bottom: 0; left: 5px;">
-    
-    URI: <?php
-    // echo UserController::class;
-    //  echo $_SERVER['REQUEST_METHOD']; ?>
-    Method: <?php 
-    // print_r($router); ?>
-    <br><br> 
-    URI: <?php
-    //  echo $_SERVER['REQUEST_URI']; ?></pre>
-    
 </body>
 
 </html>

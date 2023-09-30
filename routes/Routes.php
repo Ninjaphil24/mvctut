@@ -4,14 +4,14 @@ namespace RouterSpace;
 
 use Exception;
 use RouterSpace\RouterSetup;
-use UserControllerSpace\ListController;
-use UserControllerSpace\UserController;
+use RouterSpace\RoutesInterface;
 
-class Routes
+class Routes implements RoutesInterface
 {
     use RouterSetup;
+    public $routes = [];
 
-    public function dispatch()
+    public function dispatch():void
     {
         $this->createRoutes();
         try {
