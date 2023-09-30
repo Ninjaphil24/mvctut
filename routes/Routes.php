@@ -3,23 +3,13 @@
 namespace RouterSpace;
 
 use Exception;
+use RouterSpace\RouterSetup;
 use UserControllerSpace\ListController;
 use UserControllerSpace\UserController;
 
 class Routes
 {
-    public $routes = [];
-    private function addRoutes($uri, $controller, $method)
-    {
-        $this->routes[$uri] = ['controller' => $controller, 'method' => $method];       
-    }
-
-    public function createRoutes()
-    {
-        $this->addRoutes('/', 'UserControllerSpace\UserController', 'home');
-        $this->addRoutes('/index.php', 'UserControllerSpace\UserController', 'create');
-        $this->addRoutes('/list', ListController::class, 'listusers');
-    }
+    use RouterSetup;
 
     public function dispatch()
     {
