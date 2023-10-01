@@ -1,4 +1,4 @@
-<a href="/">Home</a>
+<a href="/" class="myButton">Home</a>
 <table>
     <tr>
         <th>First Name</th>

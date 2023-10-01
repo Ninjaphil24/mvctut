@@ -1,1 +1,1 @@
-Success <a href="/">Home</a>
+Success <a href="/" class="myButton"></a>Home</a>
