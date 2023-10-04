@@ -19,6 +19,14 @@ require_once('mysqlconnect.php');
     <?php
     $router = new Routes;
     $router->dispatch();
+    echo "<br>";
+    print_r($_GET);
+    echo "<br>";
+    echo $_SERVER['REQUEST_URI'];
+    echo "<br>";
+    print_r($uri);
+    echo "<br>";
+    echo $uri;
     ?>
 </body>
 
