@@ -18,4 +18,5 @@
         </div>
     </form>
     <a href="list" class="myButton">Go to List</a>
+    <a href="listfa" class="myButton">Go to List FA</a>
 </div>

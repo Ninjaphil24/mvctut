@@ -15,6 +15,8 @@ trait RouterSetup
         $this->addRoutes('/', UserController::class, 'home');
         $this->addRoutes('/index.php', UserController::class, 'create');
         $this->addRoutes('/list', ListController::class, 'listusers');
+        $this->addRoutes('/listfa', ListController::class, 'listusersfa');
         $this->addRoutes('/singleuser', ListController::class, 'singleuser');
+        $this->addRoutes('/singleuserfa', ListController::class, 'singleuserfa');
     }
 }
