@@ -20,8 +20,15 @@ class ListModel
     public function single($con, $id)
     {
         try {
-            $sql = "SELECT * FROM users WHERE id= $id";
-            $result = $con->query($sql);
+            $sql = "SELECT * FROM users WHERE id = ?";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param(
+                "s",
+                $id
+            );
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
             if($con->error) throw new Exception("Database Error: " . $con->error);
             return $result;
         } catch (Exception $e) {
