@@ -14,7 +14,6 @@ class IndexTest extends TestCase
     public function testConnection()
     {
         $result = $this->con->errno === 0;
-
         $this->assertTrue($result);
     }
 
