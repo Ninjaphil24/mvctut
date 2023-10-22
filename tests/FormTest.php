@@ -10,64 +10,52 @@ class FormTest extends TestCase
     protected function setUp(): void
     {
         $this->con = new mysqli("localhost", "mphil", "", "mvctut");
+        $this->idNumberSetup();
     }
+    private $max_id;
+    private function idNumberSetup()
+    {
+        $sql = "SELECT MAX(id) as max_id  FROM users";
+        $result = $this->con->query($sql);
+        $row = $result->fetch_assoc();
+        $this->max_id = $row['max_id'];
+    }
+    private $result;
+    private function createJohnSmith()
+    {
+        $_POST = [
+            'first_name' => 'John',
+            'last_name' => 'Smith',
+            'email' => 'john@smith.com',
+            'submit' => 'Submit'
+        ];
 
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+
+        $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
+
+        $statement = $this->con->prepare($query);
+
+        $statement->bind_param(
+            "sss",
+            $first_name,
+            $last_name,
+            $email
+        );
+        $this->result =  $statement->execute();
+    }
     public function testFormSubmission()
     {
-        $_POST = [
-            'first_name' => 'John',
-            'last_name' => 'Smith',
-            'email' => 'john@smith.com',
-            'submit' => 'Submit'
-        ];
-
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-
-        $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
-
-        $statement = $this->con->prepare($query);
-
-        $statement->bind_param(
-            "sss",
-            $first_name,
-            $last_name,
-            $email
-        );
-
-        $result = $statement->execute();
-
-        $this->assertTrue($result, "If this test has failed, check database for entry with email john@smith.com and delete!");
+        $this->createJohnSmith();
+        $this->assertTrue($this->result, "If this test has failed, check database for entry with email john@smith.com and delete!");
     }
-
+    
     public function testForDuplicateEmail()
     {
-        $_POST = [
-            'first_name' => 'John',
-            'last_name' => 'Smith',
-            'email' => 'john@smith.com',
-            'submit' => 'Submit'
-        ];
-
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $email = $_POST['email'];
-
-        $query = "INSERT INTO users (first_name, last_name, email) VALUES (?, ?, ?)";
-
-        $statement = $this->con->prepare($query);
-
-        $statement->bind_param(
-            "sss",
-            $first_name,
-            $last_name,
-            $email
-        );
-
-        $result = $statement->execute();
-
-        $this->assertFalse($result, "If this test has failed, check database for entry with email john@smith.com and delete!");
+        $this->createJohnSmith();
+        $this->assertFalse($this->result, "If this test has failed, check database for entry with email john@smith.com and delete!");
         $this->deleteRow();
     }
 
@@ -115,10 +103,21 @@ class FormTest extends TestCase
         $query = "DELETE FROM users WHERE email = 'john@smith.com'";
         $this->con->query($query);
     }
+    private function idNumberTearDown()
+    {
+        $newMax = $this->max_id + 1;
+        $sql = "ALTER TABLE users AUTO_INCREMENT = $newMax"; 
+        $result = $this->con->query($sql);
+    }
     public function testForEmptyEmailField()
     {
         $query = new UserModel;
         $errorMsg = $query->createUser($this->con, 'John', 'Smith', '');
         $this->assertEquals('This field cannot be empty!', $errorMsg);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->idNumberTearDown();
     }
 }
