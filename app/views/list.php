@@ -17,6 +17,7 @@
                 <td><?php echo $row['email']; ?></td>
                 <td><a href="singleuser?id=<?php echo $row['id']; ?>" class="myButton">Foreach</a></td>
                 <td><a href="singleuserfa?id=<?php echo $row['id']; ?>" class="myButton">Fetch Assoc</a></td>
+                <td><a href="singleuserfawc/<?php echo $row['id']; ?>" class="myButton">Wild Card</a></td>
             <?php }
     } else if ($uri == "/listfa") {
         print_r($result);
@@ -27,6 +28,7 @@
                 <td><?php echo $row['email']; ?></td>
                 <td><a href="singleuser?id=<?php echo $row['id']; ?>" class="myButton">Foreach</a></td>
                 <td><a href="singleuserfa?id=<?php echo $row['id']; ?>" class="myButton">Fetch Assoc</a></td>
+                <td><a href="singleuserfawc/<?php echo $row['id']; ?>" class="myButton">Wild Card</a></td>
             <?php }
     } else if ($uri == "/singleuser") {
         foreach ($rows as $row) {print_r($rows);
@@ -37,7 +39,7 @@
                 <td><?php echo $row['email']; ?></td>
                 <td><a href="list" class="myButton">List</a></td>
             <?php }
-    } else if ($uri == "/singleuserfa") {
+    } else if ($uri == "/singleuserfa"||$uri == "/singleuserfawc/") {
         print_r($result);
         echo "<br>";
         print_r($row);

@@ -10,19 +10,26 @@ class Routes implements RoutesInterface
 {
     // Variable $uri and constructor syntax are set like this to assist testing
     public $uri;
-    public function __construct($uri1=null)
+    public function __construct($uri1 = null)
     {
-        $this->uri = $uri1 ?? (isset($_SERVER['REQUEST_URI']) ? parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH):null);
+        $this->uri = $uri1 ?? (isset($_SERVER['REQUEST_URI']) ? parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) : null);
     }
     use RouterSetup;
     public $routes = [];
 
-    public function dispatch():void
+    public function dispatch(): void
     {
         $this->createRoutes();
+        echo "<pre>";
+        print_r($this->routes);
+        echo "</pre>";
         try {
             if (!array_key_exists($this->uri, $this->routes)) throw new Exception("URI does not exist!");
             $controller = $this->routes[$this->uri]['controller'];
+            echo "<pre>";
+            var_dump($this->uri);
+            var_dump($controller);
+            echo "</pre>";
             if (!class_exists($controller)) throw new Exception("Classname does not exist!");
             $method = $this->routes[$this->uri]['method'];
             $inst = new $controller;

@@ -35,4 +35,15 @@ class ListModel
             echo $e->getMessage();
         }
     }
+    public function singlewc($con, $id)
+    {
+        try {
+            $sql = "SELECT * FROM users WHERE id = $id";
+            $result = $con->query($sql);
+            if($con->error) throw new Exception("Database Error: " . $con->error);
+            return $result;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

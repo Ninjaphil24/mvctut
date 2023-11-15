@@ -62,4 +62,17 @@ class ListController
             echo $e->getMessage();
         }
     }
+    public function singleuserfawc()
+    {
+        try {
+            $inst = new ListModel;
+            if (!$inst) throw new Exception("Instantiation failure!");
+            $result = $inst->singlewc($this->con,$id);
+            if (!$result) throw new Exception("Method failure!");
+            $row = $result->fetch_assoc();
+            require_once('app/views/list.php');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
