@@ -21,20 +21,29 @@ class Routes implements RoutesInterface
     {
         $this->createRoutes();
         echo "<pre>";
-        print_r($this->routes);
+        // print_r($this->routes);
         echo "</pre>";
         try {
-            if (!array_key_exists($this->uri, $this->routes)) throw new Exception("URI does not exist!");
-            $controller = $this->routes[$this->uri]['controller'];
-            echo "<pre>";
-            var_dump($this->uri);
-            var_dump($controller);
-            echo "</pre>";
-            if (!class_exists($controller)) throw new Exception("Classname does not exist!");
-            $method = $this->routes[$this->uri]['method'];
-            $inst = new $controller;
-            if (!method_exists($inst, $method)) throw new Exception("Method does not exist!");
-            $inst->$method();
+            // if (!array_key_exists($this->uri, $this->routes)) throw new Exception("URI does not exist!");
+            foreach ($this->routes as $route => $nested) {
+                if (preg_match("#^$route$#", $this->uri, $matches)) {
+                    $controller = $nested['controller'];
+                    $method = $nested['method'];
+                    echo "<pre>";
+                    print_r($matches);
+                    print_r($nested);
+                    echo "Controller: ".$controller."<br>";
+                    echo "Method: ".$method."<br>";
+                    echo "Uri: " . $this->uri . "<br>";
+                    // echo "Controller: ".$controller;
+                    echo "</pre>";
+                    // if (!class_exists($controller)) throw new Exception("Classname does not exist!");
+                    // $method = $this->routes[$this->uri]['method'];
+                    // $inst = new $controller;
+                    // if (!method_exists($inst, $method)) throw new Exception("Method does not exist!");
+                    // $inst->$method();
+                }
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         }
