@@ -39,7 +39,7 @@
                 <td><?php echo $row['email']; ?></td>
                 <td><a href="list" class="myButton">List</a></td>
             <?php }
-    } else if ($uri == "/singleuserfa"||$uri == "/singleuserfawc/") {
+    } else if ($uri == "/singleuserfa"||preg_match("#^/singleuserfawc/([0-9]+)$#",$uri)) {
         print_r($result);
         echo "<br>";
         print_r($row);
@@ -48,7 +48,7 @@
                 <td><?php echo $row['first_name']; ?></td>
                 <td><?php echo $row['last_name']; ?></td>
                 <td><?php echo $row['email']; ?></td>
-                <td><a href="list" class="myButton">List</a></td>
+                <td><a href="/list" class="myButton">List</a></td>
             <?php } ?>
             </tr>
 

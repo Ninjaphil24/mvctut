@@ -20,30 +20,22 @@ class Routes implements RoutesInterface
     public function dispatch(): void
     {
         $this->createRoutes();
-        echo "<pre>";
-        // print_r($this->routes);
-        echo "</pre>";
         try {
-            // if (!array_key_exists($this->uri, $this->routes)) throw new Exception("URI does not exist!");
+            $routeBool = false;
             foreach ($this->routes as $route => $nested) {
                 if (preg_match("#^$route$#", $this->uri, $matches)) {
+                    $routeBool=true;
                     $controller = $nested['controller'];
                     $method = $nested['method'];
-                    echo "<pre>";
-                    print_r($matches);
-                    print_r($nested);
-                    echo "Controller: ".$controller."<br>";
-                    echo "Method: ".$method."<br>";
-                    echo "Uri: " . $this->uri . "<br>";
-                    // echo "Controller: ".$controller;
-                    echo "</pre>";
-                    // if (!class_exists($controller)) throw new Exception("Classname does not exist!");
-                    // $method = $this->routes[$this->uri]['method'];
-                    // $inst = new $controller;
-                    // if (!method_exists($inst, $method)) throw new Exception("Method does not exist!");
-                    // $inst->$method();
-                }
-            }
+                    if (!class_exists($controller)) throw new Exception("Classname does not exist!");
+                    else $inst = new $controller;
+                    if (!method_exists($inst, $method)) throw new Exception("Method does not exist!");
+                    else $inst->$method(...$matches);
+                    return;
+                } 
+            }    
+            if (!$routeBool) throw new Exception("URI does not exist!");
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }

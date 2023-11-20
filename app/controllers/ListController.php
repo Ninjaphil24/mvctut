@@ -62,7 +62,7 @@ class ListController
             echo $e->getMessage();
         }
     }
-    public function singleuserfawc()
+    public function singleuserfawc($id)
     {
         try {
             $inst = new ListModel;
