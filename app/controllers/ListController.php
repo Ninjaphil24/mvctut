@@ -7,11 +7,11 @@ use UserModelNamespace\ListModel;
 
 class ListController
 {
-    private $con;
-    public function __construct()
+    // Variable $con and constructor syntax are set like this to assist testing
+    public $con;
+    public function __construct($con1 = null)
     {
-        global $con;
-        $this->con = $con;
+        $this->con = $con1 ?? $GLOBALS['con'];
     }
     public function listusers()
     {

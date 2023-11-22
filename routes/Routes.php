@@ -16,6 +16,7 @@ class Routes implements RoutesInterface
     }
     use RouterSetup;
     public $routes = [];
+    public $matches = [];
 
     public function dispatch(): void
     {
@@ -23,10 +24,19 @@ class Routes implements RoutesInterface
         try {
             $routeBool = false;
             foreach ($this->routes as $route => $nested) {
+                $route = str_replace(":id", "([0-9]+)",$route);
                 if (preg_match("#^$route$#", $this->uri, $matches)) {
                     $routeBool=true;
                     $controller = $nested['controller'];
                     $method = $nested['method'];
+                    array_shift($matches);
+                    // Used for debugging and testing
+                    // echo "<pre>";
+                    // echo "Matches:";
+                    // print_r($matches);
+                    // echo $matches ? "true <br>" : "false<br>";
+                    // echo "Route: ". $route;
+                    // echo "</pre>";
                     if (!class_exists($controller)) throw new Exception("Classname does not exist!");
                     else $inst = new $controller;
                     if (!method_exists($inst, $method)) throw new Exception("Method does not exist!");

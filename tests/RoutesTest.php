@@ -2,6 +2,7 @@
 
 use RouterSpace\Routes;
 use PHPUnit\Framework\TestCase;
+use UserControllerSpace\ListController;
 use UserControllerSpace\UserController;
 
 class RoutesTest extends TestCase
@@ -59,5 +60,20 @@ class RoutesTest extends TestCase
         $routesMock->dispatch();
         $contents = ob_get_clean();
         $this->assertStringContainsString('Method does not exist!', $contents);
+    }
+
+    public function testRoutesCaptureGroupIntegration()
+    {
+        $routes = new Routes;
+        $routes->uri = '/singleuserfawc/15';
+        $con = $this->createMock(mysqli::class);
+        $listctrl = new ListController($con);
+        ob_start();
+        $routes->dispatch();  
+        // Use the following to see output from <pre> tags inside of dispatch method:
+        // $output = $this->getActualOutput();      
+        ob_end_clean();
+        // echo $output;
+        $this->assertIsArray($routes->matches);    
     }
 }

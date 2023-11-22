@@ -18,6 +18,6 @@ trait RouterSetup
         $this->addRoutes('/listfa', ListController::class, 'listusersfa');
         $this->addRoutes('/singleuser', ListController::class, 'singleuser');
         $this->addRoutes('/singleuserfa', ListController::class, 'singleuserfa');
-        $this->addRoutes('/singleuserfawc/([0-9]+)', ListController::class, 'singleuserfawc');
+        $this->addRoutes('/singleuserfawc/:id', ListController::class, 'singleuserfawc');
     }
 }
