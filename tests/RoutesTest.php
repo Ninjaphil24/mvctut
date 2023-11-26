@@ -70,9 +70,8 @@ class RoutesTest extends TestCase
         $listctrl = new ListController($con);
         ob_start();
         $routes->dispatch();  
+        $output = ob_get_clean();
         // Use the following to see output from <pre> tags inside of dispatch method:
-        // $output = $this->getActualOutput();      
-        ob_end_clean();
         // echo $output;
         $this->assertIsArray($routes->matches);    
     }

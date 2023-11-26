@@ -31,7 +31,8 @@
                 <td><a href="singleuserfawc/<?php echo $row['id']; ?>" class="myButton">Wild Card</a></td>
             <?php }
     } else if ($uri == "/singleuser") {
-        foreach ($rows as $row) {print_r($rows);
+        foreach ($rows as $row) {
+            print_r($rows);
             ?>
             <tr>
                 <td><?php echo $row['first_name']; ?></td>
@@ -39,17 +40,24 @@
                 <td><?php echo $row['email']; ?></td>
                 <td><a href="list" class="myButton">List</a></td>
             <?php }
-    } else if ($uri == "/singleuserfa"||preg_match("#^/singleuserfawc/([0-9]+)$#",$uri)) {
+    } else if ($uri == "/singleuserfa" || preg_match("#^/singleuserfawc/([0-9]+)$#", $uri)) {
         print_r($result);
         echo "<br>";
         print_r($row);
-        ?>
+            ?>
             <tr>
-                <td><?php echo $row['first_name']; ?></td>
-                <td><?php echo $row['last_name']; ?></td>
-                <td><?php echo $row['email']; ?></td>
-                <td><a href="/list" class="myButton">List</a></td>
-            <?php } ?>
+                <?php
+
+                if (isset($row['id'])) {
+                ?>
+                    <td><?php echo $row['first_name']; ?></td>
+                    <td><?php echo $row['last_name']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><a href="/list" class="myButton">List</a></td>
+                <?php } else { ?>
+                    <td>Don't mess with the urls</td>
+            <?php }
+            } ?>
             </tr>
 
 </table>
