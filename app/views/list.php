@@ -55,7 +55,8 @@
                     <td><?php echo $row['email']; ?></td>
                     <td><a href="/list" class="myButton">List</a></td>
                 <?php } else { ?>
-                    <td>Don't mess with the urls</td>
+                    <td colspan="3">Don't mess with the urls</td>
+                    <td><a href="/list" class="myButton">List</a></td>
             <?php }
             } ?>
             </tr>
