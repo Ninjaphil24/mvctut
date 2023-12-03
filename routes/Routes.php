@@ -18,7 +18,7 @@ class Routes implements RoutesInterface
     public $routes = [];
     // public $matches = [];
 
-    public function dispatch(): array
+    public function dispatch(): void
     {
         $this->createRoutes();
         try {
@@ -41,7 +41,7 @@ class Routes implements RoutesInterface
                     else $inst = new $controller;
                     if (!method_exists($inst, $method)) throw new Exception("Method does not exist!");
                     else $inst->$method(...$matches);
-                    return $matches;
+                    return;
                 } 
             }    
             if (!$routeBool) throw new Exception("URI does not exist!");

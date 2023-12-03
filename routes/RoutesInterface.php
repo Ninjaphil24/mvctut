@@ -3,5 +3,5 @@ namespace RouterSpace;
 
 interface RoutesInterface
 {
-    public function dispatch():array;
+    public function dispatch():void;
 }
