@@ -97,8 +97,7 @@ class ListTest extends TestCase
 
     public function testIntListPageButtonForEach()
     {
-        $_SERVER['REQUEST_URI']="/list";
-        $controller = new ListController($this->con);
+        $controller = new ListController("/list",$this->con);
         ob_start();
         $controller->listusers();
         $contents = ob_get_clean();
@@ -107,23 +106,21 @@ class ListTest extends TestCase
     
     public function testIntSingleUserPageButtonList()
     {
-        $_SERVER['REQUEST_URI']="/singleuser?id=".$this->max_id;
-        $_GET["id"] = $this->max_id;
-        $controller = new ListController($this->con);
+        $id = $this->max_id;
+        $controller = new ListController("/singleuser?id=".$this->max_id,$this->con);
         ob_start();
-        $controller->singleuser();
+        $controller->singleuser($id);
         $contents = ob_get_clean();
         $this->assertStringContainsString('List', $contents);
     }
     
     public function testIntSingleUserPageButtonListWC()
     {
-        $_SERVER['REQUEST_URI']="/singleuserfawc/".$this->max_id;
-        // $_GET["id"] = $this->max_id;
-        $controller = new ListController($this->con);
+        $controller = new ListController("/singleuserfawc/".$this->max_id,$this->con);
         ob_start();
         $controller->singleuserfawc($this->max_id);
         $contents = ob_get_clean();
+        var_dump($contents);
         $this->assertStringContainsString('List', $contents);
     }
 

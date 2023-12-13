@@ -7,7 +7,6 @@
         <th>Click to User</th>
     </tr>
     <?php
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     if ($uri == "/list") {
         print_r($rows);
         foreach ($rows as $row) { ?>
