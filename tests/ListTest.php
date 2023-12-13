@@ -97,30 +97,33 @@ class ListTest extends TestCase
 
     public function testIntListPageButtonForEach()
     {
+        // $this->log("Test 1 Start.");
         $controller = new ListController("/list",$this->con);
+        // $this->log("Before ob_start: " . ob_get_level());
         ob_start();
+        // $this->log("After ob_start: " . ob_get_level());
         $controller->listusers();
         $contents = ob_get_clean();
+        // $this->log("After ob_get_clean: " . ob_get_level());
+        // $this->log("Contents: " . $contents);
         $this->assertStringContainsString('Foreach', $contents);
     }
     
     public function testIntSingleUserPageButtonList()
     {
-        $id = $this->max_id;
-        $controller = new ListController("/singleuser?id=".$this->max_id,$this->con);
+        $controller = new ListController("/singleuser",$this->con);
         ob_start();
-        $controller->singleuser($id);
+        $controller->singleuser($this->max_id);
         $contents = ob_get_clean();
         $this->assertStringContainsString('List', $contents);
     }
     
-    public function testIntSingleUserPageButtonListWC()
+    public function testIntSingleUserPageButtonWC()
     {
         $controller = new ListController("/singleuserfawc/".$this->max_id,$this->con);
         ob_start();
         $controller->singleuserfawc($this->max_id);
         $contents = ob_get_clean();
-        var_dump($contents);
         $this->assertStringContainsString('List', $contents);
     }
 
@@ -142,5 +145,13 @@ class ListTest extends TestCase
         $this->deleteRow();
         $this->idNumberTearDown();
         $this->con->close();
+    }
+
+    private function log($message)
+    {
+        $logfile = __DIR__ . '/log.php';
+        $timestamp = date(DATE_RSS);
+        $formatted_message = "[$timestamp] . $message" . PHP_EOL;
+        file_put_contents($logfile,$formatted_message,FILE_APPEND);
     }
 }

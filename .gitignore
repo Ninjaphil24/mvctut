@@ -4,3 +4,4 @@ errors.log
 .phpunit.result.cache
 env.php
 temp
+tests/log.php

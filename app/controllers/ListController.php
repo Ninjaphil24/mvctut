@@ -7,7 +7,7 @@ use UserModelNamespace\ListModel;
 
 class ListController
 {
-    // Variable $con and constructor syntax are set like this to assist testing
+    // Variable $con and constructor syntax are set like this to assist testing $uri1 = null,
     public $con;
     public $uri;
     public function __construct($uri1 = null,$con1 = null)
@@ -23,7 +23,7 @@ class ListController
             if (!$result) throw new Exception("Instantiation failure!");
             $rows = $result->list($this->con);
             if (!$rows) throw new Exception("Method failure!");
-            require_once('app/views/list.php');
+            require('app/views/list.php');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -36,7 +36,7 @@ class ListController
             if (!$inst) throw new Exception("Instantiation failure!");
             $result = $inst->list($this->con);
             if (!$result) throw new Exception("Method failure!");
-            require_once('app/views/list.php');
+            require('app/views/list.php');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -50,7 +50,7 @@ class ListController
             if (!$result) throw new Exception("Instantiation failure!");
             $rows = $result->single($this->con,$id);
             if (!$rows) throw new Exception("Method failure!");
-            require_once('app/views/list.php');
+            require('app/views/list.php');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -65,7 +65,7 @@ class ListController
             $result = $inst->single($this->con,$id);
             if (!$result) throw new Exception("Method failure!");
             $row = $result->fetch_assoc();
-            require_once('app/views/list.php');
+            require('app/views/list.php');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -79,7 +79,7 @@ class ListController
             $result = $inst->singlewc($this->con,$id);
             if (!$result) throw new Exception("Method failure!");
             $row = $result->fetch_assoc();
-            require_once('app/views/list.php');
+            require('app/views/list.php');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
