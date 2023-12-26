@@ -19,5 +19,10 @@ trait RouterSetup
         $this->addRoutes('/singleuser', ListController::class, 'singleuser');
         $this->addRoutes('/singleuserfa', ListController::class, 'singleuserfa');
         $this->addRoutes('/singleuserfawc/:id', ListController::class, 'singleuserfawc');
+        // Ajax Routes
+        $this->addRoutes('/listajax', ListController::class, 'ajaxload');
+        $this->addRoutes('/listusers', ListController::class, 'ajaxlistusers');
+        $this->addRoutes('/listuser/:id', ListController::class, 'ajaxsingleuser');
+
     }
 }

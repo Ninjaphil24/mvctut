@@ -84,4 +84,45 @@ class ListController
             echo $e->getMessage();
         }
     }
+    // Ajax
+    public function ajaxload()
+    {
+        require('app\views\listajax.php');
+    }
+    public function ajaxlistusers()
+    {
+        try {
+            $result = new ListModel;
+            if (!$result) throw new Exception("Instantiation failure!");
+            $rows = $result->list($this->con);
+            if (!$rows) throw new Exception("Method failure!");
+            // print_r($rows);
+            $users=[];
+            while($row = $rows->fetch_assoc()){
+                $users[]=$row;
+            }
+            header('Content-Type: application/json');
+            ob_clean();
+            echo json_encode($users);
+            exit;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    public function ajaxsingleuser($id)
+    {
+        try {
+            $inst = new ListModel;
+            if (!$inst) throw new Exception("Instantiation failure!");
+            $result = $inst->singlewc($this->con,$id);
+            if (!$result) throw new Exception("Method failure!");
+            $row = $result->fetch_assoc();
+            header('Content-Type: application/json');
+            ob_clean();
+            echo json_encode($row);
+            exit;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
