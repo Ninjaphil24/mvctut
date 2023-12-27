@@ -18,6 +18,7 @@ function loadlist() {
                         <td>${users[i].last_name}</td>
                         <td>${users[i].email}</td>
                         <td><a onclick="loadsingle(${users[i].id})" class="myButton">Wild Card</a></td>
+                        <td><a onclick="loadsingleQ(${users[i].id})" class="myButton">Query String</a></td>
                     </tr>`
         }
         var tags = document.getElementsByTagName('table')[0].innerHTML = html
@@ -26,6 +27,28 @@ function loadlist() {
 function loadsingle(id) {
     const xhr = new XMLHttpRequest()
     xhr.open("GET", "/listuser/" + id)
+    xhr.send()
+    xhr.onload = function () {
+        html = `<tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Click to User</th>
+            </tr>`
+        var users = JSON.parse(this.responseText)
+        html += `<tr>
+                    <td>${users.first_name}</td>
+                    <td>${users.last_name}</td>
+                    <td>${users.email}</td>
+                    <td><a onclick="loadlist()" class="myButton">List</a></td>
+                </tr>`
+
+        var tags = document.getElementsByTagName('table')[0].innerHTML = html
+    }
+}
+function loadsingleQ(id) {
+    const xhr = new XMLHttpRequest()
+    xhr.open("GET", "/listuser?id=" + id)
     xhr.send()
     xhr.onload = function () {
         html = `<tr>

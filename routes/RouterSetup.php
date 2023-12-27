@@ -23,6 +23,7 @@ trait RouterSetup
         $this->addRoutes('/listajax', ListController::class, 'ajaxload');
         $this->addRoutes('/listusers', ListController::class, 'ajaxlistusers');
         $this->addRoutes('/listuser/:id', ListController::class, 'ajaxsingleuser');
+        $this->addRoutes('/listuser', ListController::class, 'ajaxsingleuserQ');
 
     }
 }

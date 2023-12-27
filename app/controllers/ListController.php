@@ -125,4 +125,21 @@ class ListController
             echo $e->getMessage();
         }
     }
+    public function ajaxsingleuserQ($id=NULL)
+    {
+        $id = $id ?? $_GET["id"];
+        try {
+            $inst = new ListModel;
+            if (!$inst) throw new Exception("Instantiation failure!");
+            $result = $inst->single($this->con,$id);
+            if (!$result) throw new Exception("Method failure!");
+            $row = $result->fetch_assoc();
+            header('Content-Type: application/json');
+            ob_clean();
+            echo json_encode($row);
+            exit;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
