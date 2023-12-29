@@ -1,3 +1,4 @@
+import { header } from './components/header.js'
 
 document.addEventListener("DOMContentLoaded", loadlist)
 function loadlist() {
@@ -5,12 +6,8 @@ function loadlist() {
     xhr.open("GET", "/listusers")
     xhr.send()
     xhr.onload = function () {
-        html = `<tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Click to User</th>
-                </tr>`
+        // No type declaration = global variable
+        var html = header()
         var users = JSON.parse(this.responseText)
         for (var i = 0; i < users.length; i++) {
             html += `<tr>
@@ -30,12 +27,7 @@ function loadsingle(id) {
     xhr.open("GET", "/listuser/" + id)
     xhr.send()
     xhr.onload = function () {
-        html = `<tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Click to User</th>
-            </tr>`
+        var html = header()
         var users = JSON.parse(this.responseText)
         html += `<tr>
                     <td>${users.first_name}</td>
@@ -53,12 +45,7 @@ function loadsingleQ(id) {
     xhr.open("GET", "/listuser?id=" + id)
     xhr.send()
     xhr.onload = function () {
-        html = `<tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Click to User</th>
-            </tr>`
+        var html = header()
         var users = JSON.parse(this.responseText)
         html += `<tr>
                     <td>${users.first_name}</td>
@@ -78,12 +65,8 @@ function loadsingleFetchAPI(id) {
             return response.json()
         })
         .then(function(users){
-        html = `<tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Click to User</th>
-            </tr>`
+        var html = header()
+
         html += `<tr>
                     <td>${users.first_name}</td>
                     <td>${users.last_name}</td>
