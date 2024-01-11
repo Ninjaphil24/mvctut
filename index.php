@@ -19,16 +19,24 @@ require_once('mysqlconnect.php');
     <?php
     $router = new Routes;
     $router->dispatch();
-    
-    // echo "Print_r: ";
-    // print_r($router->dispatch());
-    // echo "<br> print_r(\$_GET): ";
-    // print_r($_GET);
-    // echo "<br> \$_SERVER['REQUEST_URI']: ";
-    // echo $_SERVER['REQUEST_URI'];
-    // echo "<br> parse_url(\$_SERVER['REQUEST_URI'], PHP_URL_PATH): ";
-    // echo $router->uri;
     ?>
+<select id="bgcolorpick">
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="purple">Purple</option>
+</select>
+<button onclick="saveColor()">Save Color</button>
+<script>
+document.addEventListener("DOMContentLoaded", ()=>
+document.body.style.backgroundColor = localStorage.getItem("bgcolor")
+)
+function saveColor() {
+var color = document.getElementById("bgcolorpick").value
+localStorage.setItem("bgcolor",color)
+document.body.style.backgroundColor = localStorage.getItem("bgcolor")
+}
+
+</script>
 </body>
 
 </html>
