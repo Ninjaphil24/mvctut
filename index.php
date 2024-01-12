@@ -21,6 +21,7 @@ require_once('mysqlconnect.php');
     $router->dispatch();
     ?>
 <select id="bgcolorpick">
+    <option value="">Original</option>
     <option value="red">Red</option>
     <option value="green">Green</option>
     <option value="purple">Purple</option>

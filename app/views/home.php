@@ -11,7 +11,7 @@
         <div class="inputBox">
             <input type="email" id="email" name="email" required>
             <label for="email">Email</label>
-            <?php if (isset($errorMsg)) echo '<div style="color: red;">'.$errorMsg.'</div> <br> <br>';?>
+            <?php if (isset($errorMsg)) echo '<div style="color: red;">' . $errorMsg . '</div> <br> <br>'; ?>
         </div>
         <div class="inputBox">
             <input type="submit" name="submit" value="Submit">
@@ -20,4 +20,8 @@
     <a href="list" class="myButton">Go to List</a>
     <a href="listfa" class="myButton">Go to List FA</a>
     <a href="listajax" class="myButton">Go to ListAjax</a>
+
 </div>
+    <?php
+    if (isset($_COOKIE["FirstName"])) echo "Hello " . $_COOKIE["FirstName"] . "  ";
+    ?>

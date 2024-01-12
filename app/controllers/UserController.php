@@ -26,6 +26,7 @@ class UserController
             $errorMsg = $store->createUser($this->con, $first_name, $last_name, $email);
             if ($errorMsg==="") require_once('app/views/success.php');
             else require_once('app/views/home.php');
+            setcookie("FirstName",$first_name,time()+10,"/");
         }
     }
 }
