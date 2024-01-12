@@ -26,17 +26,17 @@ require_once('mysqlconnect.php');
     <option value="green">Green</option>
     <option value="purple">Purple</option>
 </select>
-<button onclick="saveColor()">Save Color</button>
-<script>
-document.addEventListener("DOMContentLoaded", ()=>
-document.body.style.backgroundColor = localStorage.getItem("bgcolor")
-)
-function saveColor() {
-var color = document.getElementById("bgcolorpick").value
-localStorage.setItem("bgcolor",color)
-document.body.style.backgroundColor = localStorage.getItem("bgcolor")
-}
 
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+document.body.style.backgroundColor = localStorage.getItem("bgcolor")
+document.getElementById('bgcolorpick').value = localStorage.getItem('bgcolor')
+})
+document.getElementById('bgcolorpick').addEventListener('change', function() {
+    var color = document.getElementById("bgcolorpick").value
+    localStorage.setItem("bgcolor",color)
+    document.body.style.backgroundColor = this.value
+})
 </script>
 </body>
 
