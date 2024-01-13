@@ -22,6 +22,3 @@
     <a href="listajax" class="myButton">Go to ListAjax</a>
 
 </div>
-    <?php
-    if (isset($_COOKIE["FirstName"])) echo "Hello " . $_COOKIE["FirstName"] . "  ";
-    ?>
