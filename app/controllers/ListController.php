@@ -23,8 +23,8 @@ class ListController
             if (!$result) throw new Exception("Instantiation failure!");
             $rows = $result->list($this->con);
             if (!$rows) throw new Exception("Method failure!");
-            require('app\views\components\header.php');
-            foreach ($rows as $row) require('app/views/list.php');
+            require(__DIR__.'\..\views\components\header.php');
+            foreach ($rows as $row) require(__DIR__.'\..\views\list.php');
             echo "</table>";
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -38,8 +38,8 @@ class ListController
             if (!$inst) throw new Exception("Instantiation failure!");
             $result = $inst->list($this->con);
             if (!$result) throw new Exception("Method failure!");
-            require('app\views\components\header.php');
-            while ($row = $result->fetch_assoc()) require('app/views/list.php');
+            require(__DIR__.'\..\views\components\header.php');
+            while ($row = $result->fetch_assoc()) require(__DIR__.'\..\views\list.php');
             echo "</table>";
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -54,8 +54,8 @@ class ListController
             if (!$result) throw new Exception("Instantiation failure!");
             $rows = $result->single($this->con,$id);
             if (!$rows) throw new Exception("Method failure!");
-            require('app\views\components\header.php');
-            foreach ($rows as $row) require('app/views/list.php');
+            require(__DIR__.'\..\views\components\header.php');
+            foreach ($rows as $row) require(__DIR__.'\..\views\list.php');
             echo "</table>";
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -70,9 +70,9 @@ class ListController
             if (!$inst) throw new Exception("Instantiation failure!");
             $result = $inst->single($this->con,$id);
             if (!$result) throw new Exception("Method failure!");
-            require('app\views\components\header.php');
+            require(__DIR__.'\..\views\components\header.php');
             $row = $result->fetch_assoc();
-            require('app/views/list.php');
+            require(__DIR__.'\..\views\list.php');
             echo "</table>";
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -86,9 +86,9 @@ class ListController
             if (!$inst) throw new Exception("Instantiation failure!");
             $result = $inst->singlewc($this->con,$id);
             if (!$result) throw new Exception("Method failure!");
-            require('app\views\components\header.php');
+            require(__DIR__.'\..\views\components\header.php');
             $row = $result->fetch_assoc();
-            require('app/views/list.php');
+            require(__DIR__.'\..\views\list.php');
             echo "</table>";
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -97,7 +97,7 @@ class ListController
     // Ajax
     public function ajaxload()
     {
-        require('app\views\listajax.php');
+        require(__DIR__.'\..\views\listajax.php');
     }
     public function ajaxlistusers()
     {
