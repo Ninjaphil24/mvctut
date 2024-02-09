@@ -1,4 +1,5 @@
 {
+    "name": "ninjaphil/mvctut",
     "require-dev": {
         "phpunit/phpunit": "9.6"
     },
