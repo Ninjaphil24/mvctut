@@ -5,3 +5,4 @@ errors.log
 env.php
 temp
 tests/log.php
+node_modules

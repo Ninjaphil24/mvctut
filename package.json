@@ -1,0 +1,21 @@
+{
+  "name": "vanilla",
+  "version": "1.0.0",
+  "description": "Demo",
+  "main": "OneSignalSDKWorker.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "mix",
+    "watch": "mix watch",
+    "prod": "mix --production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49"
+  }
+}
