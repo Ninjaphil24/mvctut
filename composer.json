@@ -18,5 +18,9 @@
     ],
     "require": {
       "onesignal/onesignal-php-api": "*@dev"
+    },
+    "scripts": {
+      "watch": "npx watch",
+      "prod": "npx mix --production"
     }
 }

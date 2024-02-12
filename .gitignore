@@ -6,3 +6,6 @@ env.php
 temp
 tests/log.php
 node_modules
+package.json
+package-lock.json
+webpack.mix.js
